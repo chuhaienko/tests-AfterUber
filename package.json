@@ -1,0 +1,30 @@
+{
+  "name": "test2",
+  "version": "1.0.0",
+  "description": "Test app for AfterUber",
+  "main": "index.js",
+  "scripts": {
+    "start": "mif start",
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuhaienko/test2.git"
+  },
+  "author": "Yurii Chuhaienko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chuhaienko/test2/issues"
+  },
+  "homepage": "https://github.com/chuhaienko/test2#readme",
+  "dependencies": {
+    "mif": "^2.1.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "code": "^5.2.4",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.4"
+  }
+}
