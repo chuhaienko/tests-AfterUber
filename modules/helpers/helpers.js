@@ -2,24 +2,25 @@
 
 const {BaseModule} = require('mif');
 const request      = require('request-promise');
+const _            = require('lodash');
 
 
-module.exports = class Models extends BaseModule {
+module.exports = class Helpers extends BaseModule {
 	async init () {
-		const uber  = this.app.config.app.uber;
-		const after = this.app.config.app.after;
+		const {uber, after, here} = this.app.config.app;
 
 		this.app.after = {
 			/**
 			 * Return sorted collection of AfterUber prices
-			 * @param query
+			 * @param from
+			 * @param to
 			 * @returns {Promise<void>}
 			 */
-			getPrices: async (query) => {
+			getPrices: async (from, to) => {
 				// Fetch Uber prices
 				let {prices} = await request({
 					method:  'GET',
-					url:     `https://api.uber.com/v1.2/estimates/price?start_latitude=${query.latFrom}&start_longitude=${query.lngFrom}&end_latitude=${query.latTo}&end_longitude=${query.lngTo}`,
+					url:     `https://api.uber.com/v1.2/estimates/price?start_latitude=${from.lat}&start_longitude=${from.lng}&end_latitude=${to.lat}&end_longitude=${to.lng}`,
 					headers: {
 						Authorization: `Token ${uber.serverToken}`
 					},
@@ -44,6 +45,19 @@ module.exports = class Models extends BaseModule {
 				});
 
 				return prices;
+			},
+
+			geocode: async (address) => {
+				let resp = await request({
+					method: 'GET',
+					url:    `https://geocoder.api.here.com/6.2/geocode.json?app_id=${here.appId}&app_code=${here.appCode}&searchtext=${encodeURIComponent(address)}`,
+					json:   true,
+				});
+
+				return {
+					lat: _.get(resp, 'Response.View.0.Result.0.Location.DisplayPosition.Latitude'),
+					lng: _.get(resp, 'Response.View.0.Result.0.Location.DisplayPosition.Longitude'),
+				};
 			}
 		};
 	}

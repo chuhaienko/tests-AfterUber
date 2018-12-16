@@ -4,9 +4,8 @@
 ```
 npm install
 npm start
-UBER_SERVER_TOKEN="{REAL_TOKEN}" npm start
+UBER_SERVER_TOKEN="{REAL_TOKEN}" HERE_APP_ID="{REAL_APP_ID}" HERE_APP_CODE="{REAL_APP_CODE}" npm start
 ```
-Try in browser http://localhost:8080/prices?latFrom=50.443170&lngFrom=30.521350&latTo=50.431760&lngTo=30.413820
 
 ### Tests
 ```

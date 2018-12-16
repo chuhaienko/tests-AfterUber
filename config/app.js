@@ -7,9 +7,11 @@ exports.default = function () {
 			priceMultiplier: 0.8
 		},
 		uber: {
-			clientId:     this.env('UBER_CLIENT_ID'),
-			clientSecret: this.env('UBER_CLIENT_SECRET'),
-			serverToken:  this.env('UBER_SERVER_TOKEN'),
+			serverToken: this.env('UBER_SERVER_TOKEN'),
+		},
+		here: {
+			appId:   this.env('HERE_APP_ID'),
+			appCode: this.env('HERE_APP_CODE'),
 		}
 	};
 };
